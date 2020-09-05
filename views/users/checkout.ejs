@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>amazona</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+</head>
+<body class=" container-fluid">
+    <div class="grid">
+        <header class="row">
+          <div class=" font-weight-bold">
+              <a href="/users"><p style="font-size: 3rem;">Amazona</p></a>
+          </div>
+          <div class="ml-auto">
+            <a href="/users/profile" class=" mr-5">hello <%= user  %> </a> <a href="/users/cart" class=" mr-5">cart</a> <a href="/logout">logout</a>
+            </div>
+        </header>
+    
+        <main>
+            <div class="container-fluid mx-auto row">
+                <div class="col-lg-3 col-md-3 col-12"></div>
+              
+                <div class="col-lg-6 col-md-6 col-12 mt-5 p-5 ">
+                     
+                         <form action="<%= "/users/conformorder/"+gt  %> " method="POST" class="form-group p-5" id="detailform" style="border: 1px solid black;">
+                                 <h2 class="mb-4">Shipping And Payment Detail</h2>
+                                 <label> Address : </label>
+                                 <input type="text" name="add" class=" form-control" required>
+                                 <br>
+                                 <label> City : </label>
+                                 <input type="text" name="city" class="form-control" required>
+                                 <br>
+                                 <label> Pin Code : </label>
+                                 <input type="number" name="pin" min="0" class="form-control" required>
+                                 <br>
+                                 <label> Country : </label>
+                                 <input type="text" name="country" class="form-control" required>
+                                 <br>
+                               
+
+                                 <h1 class="my-4">Select Payment Method</h1>
+                                 <input type="radio" name="payment" value="Cash on delivery" required> Cash On Delivery<br><br>
+                                   <!-- <input type="radio" name="payment" value="Paypal" required> Paypal<br><br>
+                                   <input type="radio" name="payment" value="Skrill" required> Skrill<br><br> -->
+                                 <button type="submit" class=" w-100 btn btn1" style="background-color: #ff8800;" >Palace Your Order</button>
+                         </form>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-12"></div>
+            </div> 
+        </main>
+    
+        <footer>
+             <h4 class=" text-center d-flex justify-content-center text-white align-items-center"> All rights reseverd @2020</h4>
+        </footer>
+    </div>
+
+    <script>
+        let cartItem = window.localStorage.getItem('cartItem')
+        let input = document.createElement('input')
+        input.type = 'text'
+        input.classList = 'hide'
+        input.value = cartItem
+        input.name = 'cartitem'
+
+        document.getElementById('detailform').append(input)
+    </script>  
+</body>
+</html>

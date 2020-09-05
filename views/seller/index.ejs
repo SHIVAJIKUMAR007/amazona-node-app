@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>amazona : admin panel </title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+</head>
+<body class=" container-fluid">
+    <div class="grid">
+        <header class="row">
+          <div class=" font-weight-bold">
+              <a href="/users"><p style="font-size: 3rem;">Amazona</p></a>
+          </div>
+        
+        </header>
+    
+        <main>
+            <h1 class=" my-3 container "> All Pending Orders</h1>
+           <% let serNo = 0
+             data.map(item =>{
+                %>  
+                   <p class="mt-5" style="font-size: 1.3rem;"><%= serNo %> )</p>
+                   <div class="each_header ">
+                        <div class=" container-fluid mb-2" style="border-top:1px solid black; border-bottom : 1px solid black;">
+                        <div class="row">
+                            <div>  <p>Address : <%= item.Address %></p> </div> <div class="ml-auto"> <p>user : <%= item.username %></p> </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div id="middleDiv">
+                        <script>
+                          
+                            fetch(`/api/data/<%= item.otp %>/<%= item.Time %>`).then(data=> data.json()).then(cartitem =>{
+                                let div = document.createElement('div')
+                                   cartitem = cartitem[0]
+                                div.innerHTML =`
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-12">
+                                                <div style="object-fit: cover;"><img src="../${cartitem.image}" alt="${cartitem.name}" class="img-fluid"> </div>
+                                            </div>
+                                            <div class="col-lg-9 col-md-0 col-12 p-3">
+                                                <div class="row px-5 py-2">
+                                                    <div>
+                                                        Name : ${cartitem.name}<br>
+                                                        qty : ${cartitem.qty}<br>
+                                                        rate : ${cartitem.price}
+                                                    </div>
+                                                    <div class="ml-auto">
+                                                        Total : $ ${cartitem.qty * cartitem.price}
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                        `
+                                document.getElementById('middleDiv').append(div)
+                            })
+                    
+                       
+
+                        </script> 
+                    </div>
+
+                    <div class=" container-fluid pl-0 " style="border-top:1px solid black; border-bottom : 1px solid black;">
+                      <div class="row">
+                          <div><h4>TOTAL AMOUNT TO PAY<span style="font-size:1rem">(including all taxes) : </span>$ <%=  item.gt %> /- </h4></div>
+                           <div class="ml-auto">
+                                <form action="/seller/<%= item._id %>" method="POST"  >     
+                                <label>ENTER THE OTP HERE : </label>
+                                <input type="text" name="otp" placeholder="ENTER THE OTP" class="form-control my-2">
+                                <input class="btn btn-outline-success font-weight-bold" type="submit">     
+                                </form>
+                            </div>
+                      </div>
+                    </div>
+                <%
+
+                serNo ++
+           }) %> 
+             
+           
+                       
+        </main>
+    
+        <footer>
+             <h4 class=" text-center d-flex justify-content-center text-white align-items-center"> All rights reseverd @2020</h4>
+        </footer>
+    </div>
+    
+    <script>
+        if(`<%= fail %>`){
+           alert(`<%= fail %>`)
+        }    
+    </script>
+</body>
+</html>

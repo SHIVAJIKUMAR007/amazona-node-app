@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>amazona</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+</head>
+<body class=" container-fluid">
+    <div class="grid">
+        <header class="row">
+          <div class=" font-weight-bold">
+              <a href="/users"><p style="font-size: 3rem;">Amazona</p></a>
+          </div>
+          <div class="ml-auto">
+            <a href="/users/profile" class=" mr-5">hello <%= user %></a> <a href="/users/cart" class=" mr-5">cart</a> <a href="/logout">logout</a>
+            </div>
+        </header>
+    
+        <main>
+           <ul class="products list-unstyled d-flex flex-wrap flex-row justify-content-center">
+              <% data.map(data =>{
+                  %>
+                  <li class=" product m-3">
+                <a href="<%= "/users/product/"+data.id %>" id="productLink">
+                <div class="card" style="width: 20rem;">
+                    <img src="<%= "../"+ data.image %>" class="card-img-top" style="height: 20rem;" alt="<%= data.name %>">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= data.name %></h5>
+                      <h6 class=" card-text"> <%= data.brand %> </h6>
+                      <p class="card-text">Price : $ <%= data.price %> </p>
+                      <a href="<%= "/product/"+data.id %>" class="btn btn-primary">Take a brief Look</a>
+                    </div>
+                  </div>
+               </li></a>  
+                  <%
+              }) %> 
+           </ul>
+        </main>
+    
+        <footer>
+             <h4 class=" text-center d-flex justify-content-center text-white align-items-center"> All rights reseverd @2020</h4>
+        </footer>
+    </div>
+</body>
+</html>

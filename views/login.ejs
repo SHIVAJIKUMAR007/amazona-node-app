@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>amazona</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+</head>
+<body class=" container-fluid">
+    <div class="grid">
+        <header class="row">
+          <div class=" font-weight-bold">
+              <a href="/"><p style="font-size: 3rem;">Amazona</p></a>
+          </div>
+          <div class="ml-auto">
+              <a href="/cart" class=" mr-5">cart</a> <a href="/signup">sign up</a>
+            </div>
+        </header>
+    
+        <main class="container-fluid mt-5">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-12"></div>
+                <div class="col-lg-4 col-md-4 col-12 mt-5 p-5 pb-3" style="border: 1px solid black; border-radius: 1rem ;">
+                    <h2 class="text-center mt-3">Sign In</h2>
+                    <form <% if(fail != 'register successfully \n login now !!' && fail != '') 
+                          {%> action="/signin/<%= fail  %>"   <%}else{%> action="/signin/<%= fail  %>" <%} %>   method="POST" class=" form-group">
+    
+                       <label> Username :  </label>
+                       <input type="text" name="username" id="username" class="form-control" autocomplete="off" required>
+                        <br>
+                       <label>Password : </label>
+                       <input type="password" name="pass" id="pass" class=" form-control" required>                      
+                       <br><br>
+                       <input type="submit" value="Login" class="w-100 btn" style="background-color: #f08040;">
+                    </form>
+                    <h4>new user ? <a href="/signup" style="text-decoration: none;">Create New Account</a></h4>
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-12"></div>
+            </div>
+        </main>
+    
+        <footer>
+             <h4 class=" text-center d-flex justify-content-center text-white align-items-center"> All rights reseverd @2020</h4>
+        </footer>
+        <script>
+            if(`<%= fail %>` == 'register successfully \n login now !!'){
+                alert(`<%= fail %>`)
+            }
+        </script>
+    </div>
+</body>
+</html>

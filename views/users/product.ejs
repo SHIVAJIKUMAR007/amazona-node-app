@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>amazona</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+</head>
+<body class=" container-fluid">
+    <div class="grid">
+        <header class="row">
+          <div class=" font-weight-bold">
+              <a href="/"><p style="font-size: 3rem;">Amazona</p></a>
+          </div>
+          <div class="ml-auto">
+            <a href="/users/profile" class=" mr-5">hello <%= user %></a> <a href="/users/cart" class=" mr-5">cart</a> <a href="/logout">logout</a>
+            </div>
+        </header>
+    
+        <main>
+            <a href="/users"> <div class="mt-3 btn btn-danger">Back</div></a>
+            <div class=" d-flex justify-content-around flex-row flex-wrap ">
+                <div>
+                   <figure id="proImageFig">
+                       <img id="proImage" src="<%= "../../"+data.image  %> " alt="<%= data.name  %> ">
+                   </figure>
+                </div>
+
+                <div class="mt-5 mb-4">
+                    <h3>  <%= data.name  %>   </h3> 
+                    <h5> <%= data.brand  %> </h5>
+                    <h5>Price : $ <%= data.price %></h5>
+                </div>
+
+                <div class="p-5 mb-4" style="border: 1px solid black; border-radius: 2rem; height:min-content;">
+                    <h5>Price : $ <%= data.price  %></h5>
+                    <h5> Status : <% if(data.countInStock){
+                        %><span class=" px-5 alert-success w-25">In Stock </span> <%
+                    }else{
+                          %> <span class=" px-5 alert-danger w-25">Out of Stock </span><%
+                        } %>   </h5>
+                    
+                    <button id="addToCart" class="w-100 btn text-white mt-3" 
+                        style="background-color: #f08040;" > Add To Cart</button>
+                
+                </div>
+                
+            </div>
+        </main>
+    
+        <footer>
+             <h4 class=" text-center d-flex justify-content-center text-white align-items-center"> All rights reseverd @2020</h4>
+        </footer>
+    </div>
+    <script>
+      let itemToInsert = {
+            id : '<%= data.id%>',
+            name :'<%= data.name%>',
+            qty : 1,
+            image :'<%= data.image%>',
+            price :'<%= data.price%>',
+            countInStock :'<%= data.countInStock%>'
+        }
+    let button = document.getElementById('addToCart')
+    button.addEventListener('click',( updateQty )=> {
+        let cartItem = getCartItem()
+        let exist = cartItem.find(x => x.id == itemToInsert.id)
+        console.log(exist)
+
+        if(exist==undefined){
+            cartItem = [...cartItem, itemToInsert]
+            console.log(cartItem)
+            setCartItem(cartItem)
+        }
+        
+        window.location.assign('/cart')
+        
+    })
+
+    const getCartItem = () =>{
+            let cartItem = window.localStorage.getItem('cartItem')? 
+            JSON.parse(window.localStorage.getItem('cartItem')):[]
+            // console.log(cartItem)
+            return cartItem
+        }
+
+        const setCartItem = (cartItem)=>{
+                window.localStorage.setItem('cartItem', JSON.stringify(cartItem))
+        } 
+                </script>
+   
+</body>
+</html>
