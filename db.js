@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017/amazona', {useNewUrlParser : true})
+mongoose.connect('mongodb+srv://shivaji:shivaji@cluster0.narig.mongodb.net/amazona?retryWrites=true&w=majority', {useNewUrlParser : true})
 const conn = mongoose.connection
 
 
